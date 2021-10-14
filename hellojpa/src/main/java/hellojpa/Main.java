@@ -6,6 +6,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import hellojpa.entity.Member;
+import hellojpa.entity.MemberType;
 
 /**
  * @description run with jdk8
@@ -26,12 +27,12 @@ public class Main {
 		tx.begin();
 		
 		try {
-			Member member = new Member();
-			member.setId(100L);
+			Member member = new Member(); 
+//			member.setId(100L);
 			member.setName("안녕하세요");
+			member.setMemberType(MemberType.USER);
 			
 			em.persist(member); // INSERT DB
-			
 			tx.commit();
 		}catch(Exception e){
 			tx.rollback();
