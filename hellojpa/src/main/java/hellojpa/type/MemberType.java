@@ -1,4 +1,4 @@
-package hellojpa.entity;
+package hellojpa.type;
 
 public enum MemberType {
 	

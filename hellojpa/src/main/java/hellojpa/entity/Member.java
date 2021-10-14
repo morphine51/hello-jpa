@@ -4,11 +4,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+
+import hellojpa.type.MemberType;
 
 @Entity
 public class Member {
@@ -17,9 +22,40 @@ public class Member {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(name = "USER_NAME", nullable = false) // DB의 mapping될 컬럼명
+	@Column(name = "USERNAME", nullable = false) // DB의 mapping될 컬럼명
 	private String name;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TEAM_ID")
+	private Team team;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Team getTeam() {
+		return team;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
+	}
 	
+	
+
+	/*
 	private Integer age;
 
 	// 현업에서는 꼭 EnumType.STRING 을 써야함
@@ -38,32 +74,7 @@ public class Member {
 	@Lob
 	@Column(name = "BLOB")
 	private byte[] blob; // byte인 경우 blob
-	
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Integer getAge() {
-		return age;
-	}
-	public void setAge(Integer age) {
-		this.age = age;
-	}
-	public MemberType getMemberType() {
-		return memberType;
-	}
-	public void setMemberType(MemberType memberType) {
-		this.memberType = memberType;
-	}
+	*/
 	
 	
 

@@ -1,12 +1,14 @@
 package hellojpa;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import hellojpa.entity.Member;
-import hellojpa.entity.MemberType;
+import hellojpa.entity.Team;
 
 /**
  * @description run with jdk8
@@ -27,13 +29,35 @@ public class Main {
 		tx.begin();
 		
 		try {
-			Member member = new Member(); 
-//			member.setId(100L);
-			member.setName("안녕하세요");
-			member.setMemberType(MemberType.USER);
 			
+			// 팀 저장
+			Team team = new Team();
+			team.setName("teamA");
+			em.persist(team);
+			
+			Member member = new Member(); 
+			member.setName("안녕하세요");
+			member.setTeam(team);
 			em.persist(member); // INSERT DB
+			
+			em.flush();
+			em.clear();
+			
 			tx.commit();
+			
+			/////
+			
+			Member findMember = em.find(Member.class, member.getId());
+			Team findTeam = findMember.getTeam();
+			
+			List<Member> members = findTeam.getMembers();
+			for(Member record : members) {
+				System.out.println(record.getName());
+			}
+			
+			
+			
+			
 		}catch(Exception e){
 			tx.rollback();
 		}finally {
