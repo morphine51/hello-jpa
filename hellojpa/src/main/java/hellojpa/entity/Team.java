@@ -9,7 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class Team {
 
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,25 +21,5 @@ public class Team {
 	
 	@OneToMany(mappedBy = "team") // Member의 team object와 연관관계를 지어준다.
 	List<Member> members = new ArrayList<Member>();
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public List<Member> getMembers() {
-		return members;
-	}
-	public void setMembers(List<Member> members) {
-		this.members = members;
-	}
-	
 	
 }

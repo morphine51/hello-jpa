@@ -5,16 +5,26 @@
   <version>0.0.1-SNAPSHOT</version>
   
   <dependencies>
+  
+	<dependency>
+	    <groupId>org.projectlombok</groupId>
+	    <artifactId>lombok</artifactId>
+	    <version>1.16.18</version>
+	    <scope>provided</scope>
+	</dependency>
+  	
   	<dependency>
   		<groupId>org.hibernate</groupId>
   		<artifactId>hibernate-entitymanager</artifactId>
   		<version>5.3.7.Final</version>
   	</dependency>
+  	
   	<dependency>
   		<groupId>com.h2database</groupId>
   		<artifactId>h2</artifactId>
   		<version>1.4.197</version>
   	</dependency>
+  	
   </dependencies>
   
 </project>
